@@ -14,12 +14,12 @@ def plusOne(A):
             A[i]=temp
         if(c!=0):
             A.insert(0,c)
-        print(A[0])
         while(A[0]==0):
             A.pop(0)
         return A
     else:
         A[n-1]=temp
+        
         return A
 A=[0,3,7,6,4,0,5,5,6]
 print(plusOne(A))

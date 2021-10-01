@@ -3,21 +3,18 @@
 
 
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    
+    res=0#Function to return the diameter of a Binary Tree.
+    def height(self,root):
         if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
+            return 0
+        lh=self.height(root.left)
+        rh=self.height(root.right)
+        self.res=max(self.res,1+lh+rh)
+        return 1+max(lh,rh)
+    def diameter(self,root):
+        h=self.height(root)
+        return self.res
         # Code here
 
 #{ 
@@ -26,12 +23,16 @@ class Solution:
 
 #Contributed by Sudarshan Sharma
 from collections import deque
+import sys
+sys.setrecursionlimit(50000)
 # Tree Node
 class Node:
     def __init__(self, val):
         self.right = None
         self.data = val
         self.left = None
+
+
 
 # Function to Build Tree   
 def buildTree(s):
@@ -96,10 +97,8 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
+        k=Solution().diameter(root)
+        print(k)
 
 
 

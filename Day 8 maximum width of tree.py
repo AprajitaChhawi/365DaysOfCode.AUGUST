@@ -1,24 +1,35 @@
 #User function Template for python3
 
 
-
+'''
+# Node Class:
+class Node:
+    def _init_(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    #Function to get the maximum width of a binary tree.
+    def getMaxWidth(self,root):
         if root==None:
-            return
+            return 0
         q=[]
-        l=[]
+        ma=0
         q.append(root)
         while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+            n=len(q)
+            ma=max(ma,n)
+            for i in range(n):
+                temp=q.pop(0)
+                if temp.left!=None:
+                    q.append(temp.left)
+                if temp.right!=None:
+                    q.append(temp.right)
+        return ma
+       
+        #code here
+
 
 #{ 
 #  Driver Code Starts
@@ -26,6 +37,7 @@ class Solution:
 
 #Contributed by Sudarshan Sharma
 from collections import deque
+import queue 
 # Tree Node
 class Node:
     def __init__(self, val):
@@ -96,11 +108,5 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
-
+        print(Solution().getMaxWidth(root))
 # } Driver Code Ends

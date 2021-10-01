@@ -1,29 +1,39 @@
 #User function Template for python3
 
 
+'''
+# Node Class:
+class Node:
+    def _init_(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 
-class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+#Function to return a list containing elements of left view of the binary tree.
+def LeftView(root):
+    if root==None:
+        return []
+    l=[]
+    l1=[]
+    l.append(root)
+    while(len(l)):
+        n=len(l)
+        for i in range(0,n):
+            temp=l.pop(0)
+            if i==0:
+                l1.append(temp.data)
+            if temp.left!=None:
+                l.append(temp.left)
+            if temp.right!=None:
+                l.append(temp.right)
+    return l1
+            
+    
+    # code here
 
 #{ 
 #  Driver Code Starts
-#Initial Template for Python 3
-
 #Contributed by Sudarshan Sharma
 from collections import deque
 # Tree Node
@@ -96,11 +106,9 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
+        result = LeftView(root)
+        for value in result:
+            print(value,end=" ")
         print()
-
-
 
 # } Driver Code Ends

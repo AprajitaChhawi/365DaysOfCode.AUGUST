@@ -1,38 +1,54 @@
 #User function Template for python3
 
-
+'''
+class Node:
+    def __init__(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    #Function to store the zig zag order traversal of tree in a list.
+    def zigZagTraversal(self,root):
         if root==None:
-            return
-        q=[]
+            return []
+        s1=[]
+        s2=[]
         l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+        s1.append(root)
+        while(len(s1)!=0 or len(s2)!=0):
+            while(len(s1)!=0):
+                temp=s1.pop(-1)
+                l.append(temp.data)
+                if temp.left:
+                    s2.append(temp.left)
+                if temp.right:
+                    s2.append(temp.right)
+            while(len(s2)!=0):
+                temp=s2.pop(-1)
+                l.append(temp.data)
+                if temp.right:
+                    s1.append(temp.right)
+                if temp.left:
+                    s1.append(temp.left)
+        return l   
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
 
-#Contributed by Sudarshan Sharma
+#contributed by RavinderSinghPB
+
+from collections import defaultdict
 from collections import deque
-# Tree Node
+
 class Node:
-    def __init__(self, val):
-        self.right = None
+    def __init__(self,val):
         self.data = val
         self.left = None
-
+        self.right = None
+        
 # Function to Build Tree   
 def buildTree(s):
     #Corner Case
@@ -90,17 +106,14 @@ def buildTree(s):
         i=i+1
     return root
     
-    
-if __name__=="__main__":
+if __name__ == '__main__':
     t=int(input())
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
+        ob = Solution()
+        res = ob.zigZagTraversal(root)
+        for i in range (len (res)):
+            print (res[i], end = " ")
         print()
-
-
-
 # } Driver Code Ends

@@ -1,30 +1,35 @@
 #User function Template for python3
 
 
+'''class Node: 
+    # Constructor to create a new Node 
+    def __init__(self, data): 
+        self.data = data 
+        self.left = None
+        self.right = None'''
 
-class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+def height(root):
+    if root==None:
+        return 0
+    return max(height(root.left),height(root.right))+1
+#Function to check whether a binary tree is balanced or not.
+def isBalanced(root):
+    if root==None:
+        return True
+    if root.left==None and root.right==None:
+        return True
+    lh=height(root.left)
+    rh=height(root.right)
+    return (abs(lh-rh)<=1 and isBalanced(root.left) and isBalanced(root.right))
+    
+    #add code here
+
+
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
 
-#Contributed by Sudarshan Sharma
 from collections import deque
 # Tree Node
 class Node:
@@ -96,11 +101,8 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
-
+        if isBalanced(root):
+            print(1) 
+        else:
+            print(0)
 # } Driver Code Ends

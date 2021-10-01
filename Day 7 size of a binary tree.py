@@ -1,24 +1,18 @@
-#User function Template for python3
-
-
-
-class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+# Your task to complete this function
+# function should return size of the binary tree as integer
+def getSize(node):
+    q=[]
+    count=0
+    q.append(node)
+    while(len(q)):
+        temp=q.pop(0)
+        count=count+1
+        if temp.left:
+            q.append(temp.left)
+        if temp.right:
+            q.append(temp.right)
+    return count
+    # code here
 
 #{ 
 #  Driver Code Starts
@@ -96,11 +90,8 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
+        print(getSize(root))
+        
+        
 
 # } Driver Code Ends

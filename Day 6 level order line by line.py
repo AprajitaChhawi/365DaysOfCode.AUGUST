@@ -1,29 +1,37 @@
 #User function Template for python3
 
+'''
+class Node:
+    def _init_(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 
-
-class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
+#Function to return the level order traversal line by line of a tree.
+def levelOrder(root):
+    l=[]
+    q=[]
+    if root==None:
+        return 0
+    q.append(root)
+    while(len(q)):
+        n=len(q)
+        l1=[]
+        for i in range(n):
             temp=q.pop(0)
-            l.append(temp.data)
+            l1.append(temp.data)
             if temp.left:
                 q.append(temp.left)
             if temp.right:
                 q.append(temp.right)
-        return l
-        # Code here
+        l.append(l1)
+    return l
+    
+    # code here
 
 #{ 
 #  Driver Code Starts
-#Initial Template for Python 3
-
 #Contributed by Sudarshan Sharma
 from collections import deque
 # Tree Node
@@ -96,11 +104,12 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
+        result = levelOrder(root)
+        for values in result:
+            for value in values:
+                print(value,end = " ")
+            print("$",end = " ")
         print()
-
 
 
 # } Driver Code Ends

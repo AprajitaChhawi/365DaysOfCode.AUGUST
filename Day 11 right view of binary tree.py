@@ -2,30 +2,46 @@
 
 
 
+'''
+# Node Class:
+class Node:
+    def init(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    #Function to return list containing elements of right view of binary tree.
+    def rightView(self,root):
         if root==None:
-            return
-        q=[]
+            return []
         l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+        l1=[]
+        l.append(root)
+        while(len(l)):
+            n=len(l)
+            for i in range(0,n):
+                temp=l.pop(0)
+                if i==n-1:
+                    l1.append(temp.data)
+                if temp.left!=None:
+                    l.append(temp.left)
+                if temp.right!=None:
+                    l.append(temp.right)
+        return l1
+        
+        # code here
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
 
+
+#Initial Template for Python 3
+
 #Contributed by Sudarshan Sharma
 from collections import deque
+import queue
 # Tree Node
 class Node:
     def __init__(self, val):
@@ -33,6 +49,7 @@ class Node:
         self.data = val
         self.left = None
 
+    
 # Function to Build Tree   
 def buildTree(s):
     #Corner Case
@@ -96,11 +113,11 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
+        result = Solution().rightView(root)
+        for value in result:
+            print(value, end = " ")
         print()
-
-
+        
+        
 
 # } Driver Code Ends

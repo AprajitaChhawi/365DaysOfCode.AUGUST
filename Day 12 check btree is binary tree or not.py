@@ -1,30 +1,25 @@
 #User function Template for python3
 
 
-
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    def BST(self,root,minimum,maximum):
         if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+            return True
+        if root.data<minimum or root.data>maximum:
+            return False
+        return (self.BST(root.left,minimum,root.data-1) and self.BST(root.right,root.data+1,maximum))
+    
+    #Function to check whether a Binary Tree is BST or not.
+    def isBST(self, root):
+        return self.BST(root,-999999,999999)
+        
+        #code here
+
+
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
-
-#Contributed by Sudarshan Sharma
 from collections import deque
 # Tree Node
 class Node:
@@ -96,11 +91,8 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
-
+        if Solution().isBST(root):
+            print(1) 
+        else:
+            print(0)
 # } Driver Code Ends

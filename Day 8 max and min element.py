@@ -1,39 +1,51 @@
 #User function Template for python3
 
-
-
+'''
+class Node:
+    def __init__(self,val):
+        self.data=val
+        self.left=None
+        self.right=None
+'''
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
+    def findMax(self,root):
         q=[]
-        l=[]
+        ma=-99999
         q.append(root)
         while(len(q)):
             temp=q.pop(0)
-            l.append(temp.data)
+            ma=max(ma,temp.data)
             if temp.left:
                 q.append(temp.left)
             if temp.right:
                 q.append(temp.right)
-        return l
-        # Code here
+        return ma
+        #code here
+    def findMin(self,root):
+        q=[]
+        ma=99999
+        q.append(root)
+        while(len(q)):
+            temp=q.pop(0)
+            ma=min(ma,temp.data)
+            if temp.left:
+                q.append(temp.left)
+            if temp.right:
+                q.append(temp.right)
+        return ma
+        #code here
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
 
-#Contributed by Sudarshan Sharma
 from collections import deque
-# Tree Node
 class Node:
-    def __init__(self, val):
-        self.right = None
-        self.data = val
-        self.left = None
-
-# Function to Build Tree   
+    def __init__(self,val):
+        self.data=val
+        self.left=None
+        self.right=None
+        
 def buildTree(s):
     #Corner Case
     if(len(s)==0 or s[0]=="N"):           
@@ -89,18 +101,13 @@ def buildTree(s):
             size=size+1
         i=i+1
     return root
-    
-    
-if __name__=="__main__":
-    t=int(input())
-    for _ in range(0,t):
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
-
+        ob = Solution()
+        mx = ob.findMax(root)
+        mn = ob.findMin(root)
+        print(mx,mn)
 # } Driver Code Ends

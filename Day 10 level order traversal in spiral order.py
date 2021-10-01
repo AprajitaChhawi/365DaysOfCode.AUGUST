@@ -1,28 +1,50 @@
 #User function Template for python3
 
 
+#Function to return a list containing the level order traversal in spiral form.
+def findSpiral(root):
+    if root==None:
+        return []
+    q=[]
+    l=[]
+    itr=0
+    q.append(root)
+    while(len(q)):
+        n=len(q)
+        if itr%2==0:
+            q1=q[:]
+            while(len(q1)):
+                temp=q1.pop(-1)
+                l.append(temp.data)
+            for i in range(n):
+                temp=q.pop(0)
+                if temp.left:
+                    q.append(temp.left)
+                if temp.right:
+                    q.append(temp.right)
+        else:
+            for i in range(n):
+                temp=q.pop(0)
+                l.append(temp.data)
+                if temp.left:
+                    q.append(temp.left)
+                if temp.right:
+                    q.append(temp.right)
+        itr=itr+1
+    return l   
+                
+    # Code here
 
-class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
-        if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
-        # Code here
+
+
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
+
+#Initial Template for Python 3
+
+
 
 #Contributed by Sudarshan Sharma
 from collections import deque
@@ -33,6 +55,9 @@ class Node:
         self.data = val
         self.left = None
 
+
+
+    
 # Function to Build Tree   
 def buildTree(s):
     #Corner Case
@@ -96,11 +121,11 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
+        result = findSpiral(root)
+        for value in result:
+            print(value,end = " ")
         print()
-
-
+        
+        
 
 # } Driver Code Ends

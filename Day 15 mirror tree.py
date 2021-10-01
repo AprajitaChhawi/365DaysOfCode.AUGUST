@@ -1,28 +1,33 @@
 #User function Template for python3
 
-
+'''
+class Node:
+    def _init_(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+'''
+# your task is to complete this function
 
 class Solution:
-    #Function to return the level order traversal of a tree.
-    def levelOrder(self,root ):
+    #Function to convert a binary tree into its mirror tree.
+    def mirror(self,root):
         if root==None:
-            return
-        q=[]
-        l=[]
-        q.append(root)
-        while(len(q)):
-            temp=q.pop(0)
-            l.append(temp.data)
-            if temp.left:
-                q.append(temp.left)
-            if temp.right:
-                q.append(temp.right)
-        return l
+            return root
+        else:
+            temp=root
+            self.mirror(root.left)
+            self.mirror(root.right)
+            temp.left,temp.right=temp.right,temp.left
+        return root
+        
         # Code here
 
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
+
+
 
 #Contributed by Sudarshan Sharma
 from collections import deque
@@ -33,6 +38,20 @@ class Node:
         self.data = val
         self.left = None
 
+
+def inorderTraversalUtil(root):
+    # Code here
+    if root is None:
+        return
+    inorderTraversalUtil(root.left)
+    print(root.data, end=' ')    
+    inorderTraversalUtil(root.right)
+
+def inorderTraversal(root):
+    # Code here
+    inorderTraversalUtil(root)
+    print()
+    
 # Function to Build Tree   
 def buildTree(s):
     #Corner Case
@@ -96,11 +115,9 @@ if __name__=="__main__":
     for _ in range(0,t):
         s=input()
         root=buildTree(s)
-        res = Solution().levelOrder(root)
-        for i in res:
-            print (i, end = " ")
-        print()
-
-
+        Solution().mirror(root)
+        inorderTraversal(root)
+        
+        
 
 # } Driver Code Ends
